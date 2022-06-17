@@ -1,29 +1,30 @@
 import './App.css';
 import { useState, useEffect } from 'react';
 import Plane from './components/Plane';
+import UserLocation from './components/UserLocation';
 import { config } from './config';
 
 function App() {
-  const [location, setLocation] = useState([]);
-  const fetchLocation = async () => {
-    const response = await fetch('http://ip-api.com/json/');
-    const data = await response.json();
-    setLocation(data);
-    //console.log(data);
+  let location = {
+    latitude: '',
+    longitude: '',
   };
 
-  //need to refactor using code below
-  /*   if ('geolocation' in navigator) {
-    navigator.geolocation.getCurrentPosition((position) => {
-      console.log(position.coords.latitude);
-      console.log(position.coords.longitude);
-    });
-  } */
+  const fetchLocation = () => {
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        console.log(position.coords.latitude);
+        console.log(position.coords.longitude);
+        location.latitude = position.coords.latitude;
+        location.longitude = position.coords.longitude;
+      });
+    }
+  };
 
   const [planes, setPlanes] = useState([]);
   const fetchPlanes = async () => {
-    const latT = location.lat.toFixed(3);
-    const lonT = location.lon.toFixed(3);
+    const latT = location.latitude.toFixed(3);
+    const lonT = location.longitude.toFixed(3);
     const options = {
       method: config.method,
       headers: config.headers,
@@ -46,10 +47,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <ul>
-          <li>Lat: {location.lat}</li>
-          <li>Lon: {location.lon}</li>
-        </ul>
+        <UserLocation location={location} />
         <button onClick={fetchPlanes}>Find Planes!</button>
         {!planes.ac ? '' : planes.ac.map((p) => <Plane flight={p.flight} />)}
       </header>
