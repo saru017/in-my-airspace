@@ -1,0 +1,6 @@
+article {
+  color: white;
+  display: inline-flex;
+  margin: 10px;
+  flex-direction: row;
+}

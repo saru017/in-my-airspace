@@ -1,25 +1,12 @@
 import './App.css';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Plane from './components/Plane';
 import UserLocation from './components/UserLocation';
+import { usePosition } from './components/usePosition';
 import { config } from './config';
 
 function App() {
-  let location = {
-    latitude: '',
-    longitude: '',
-  };
-
-  const fetchLocation = () => {
-    if ('geolocation' in navigator) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        console.log(position.coords.latitude);
-        console.log(position.coords.longitude);
-        location.latitude = position.coords.latitude;
-        location.longitude = position.coords.longitude;
-      });
-    }
-  };
+  const location = usePosition();
 
   const [planes, setPlanes] = useState([]);
   const fetchPlanes = async () => {
@@ -31,7 +18,7 @@ function App() {
     };
 
     fetch(
-      `https://adsbexchange-com1.p.rapidapi.com/v2/lat/${latT}/lon/${lonT}/dist/25/`,
+      `https://adsbexchange-com1.p.rapidapi.com/v2/lat/${latT}/lon/${lonT}/dist/10/`,
       options
     )
       .then((response) => response.json())
@@ -39,18 +26,20 @@ function App() {
       .catch((err) => console.error(err));
   };
 
-  useEffect(() => {
-    fetchLocation();
-    //fetchPlanes();
-  }, []);
-
   return (
     <div className="App">
       <header className="App-header">
         <UserLocation location={location} />
-        <button onClick={fetchPlanes}>Find Planes!</button>
-        {!planes.ac ? '' : planes.ac.map((p) => <Plane flight={p.flight} />)}
       </header>
+      <body>
+        <div className="planes">
+          <button onClick={fetchPlanes}>Find Planes!</button>
+          <br />
+          {!planes.ac
+            ? ''
+            : planes.ac.map((p) => <Plane flight={p} className="flight" />)}
+        </div>
+      </body>
     </div>
   );
 }

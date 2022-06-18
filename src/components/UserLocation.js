@@ -1,16 +1,17 @@
-import { useState, useEffect, React } from 'react';
+import { React } from 'react';
 
 function UserLocation(props) {
-  const latitude = props.latitude;
-  const longitude = props.longitude;
-
-  
+  const latitude = props.location.latitude;
+  const longitude = props.location.longitude;
 
   return (
-    <ul>
-      <li>Lat: {props.latitude}</li>
-      <li>Lon: {props.longitude}</li>
-    </ul>
+    <div>
+      <h1>Your location is:</h1>
+      <ul>
+        <li>Lat: {latitude}</li>
+        <li>Lon: {longitude}</li>
+      </ul>
+    </div>
   );
 }
 
