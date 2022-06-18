@@ -1,10 +1,9 @@
 .App {
-  text-align: center;
+  text-align: left;
+  background-color: #282c34;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+html {
+  background-color: #282c34;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -28,12 +27,13 @@
   color: #61dafb;
 }
 
-body {
+.planes {
   background-color: #282c34;
   display: flexbox;
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  text-align: left;
 }
 
 flight {

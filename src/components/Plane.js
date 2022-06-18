@@ -10,6 +10,8 @@ function Plane(props) {
         Type: {props.flight.t}
         <br />
         Hex: {props.flight.hex}
+        <br />
+        Altitude: {props.flight.alt_baro}
       </h3>
     </article>
   );

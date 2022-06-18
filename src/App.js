@@ -4,6 +4,7 @@ import Plane from './components/Plane';
 import UserLocation from './components/UserLocation';
 import { usePosition } from './components/usePosition';
 import { config } from './config';
+import PlaneCount from './components/PlaneCount';
 
 function App() {
   const location = usePosition();
@@ -18,7 +19,7 @@ function App() {
     };
 
     fetch(
-      `https://adsbexchange-com1.p.rapidapi.com/v2/lat/${latT}/lon/${lonT}/dist/10/`,
+      `https://adsbexchange-com1.p.rapidapi.com/v2/lat/${latT}/lon/${lonT}/dist/5/`,
       options
     )
       .then((response) => response.json())
@@ -26,20 +27,26 @@ function App() {
       .catch((err) => console.error(err));
   };
 
+  const numPlanes = planes.ac;
+  //console.log(numPlanes);
+
   return (
     <div className="App">
       <header className="App-header">
         <UserLocation location={location} />
       </header>
-      <body>
-        <div className="planes">
+
+      <div className="planes">
+        <center>
           <button onClick={fetchPlanes}>Find Planes!</button>
-          <br />
-          {!planes.ac
-            ? ''
-            : planes.ac.map((p) => <Plane flight={p} className="flight" />)}
-        </div>
-      </body>
+        </center>
+        <br />
+        <PlaneCount planes={planes} />
+        <br />
+        {!planes.ac
+          ? ''
+          : planes.ac.map((p) => <Plane flight={p} className="flight" />)}
+      </div>
     </div>
   );
 }
