@@ -1,6 +1,6 @@
-article {
+#plane {
   color: white;
-  display: inline-flex;
+  display: grid-inline;
+  grid-auto-flow: dense;
   margin: 10px;
-  flex-direction: row;
 }

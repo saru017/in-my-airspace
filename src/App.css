@@ -1,5 +1,7 @@
 .App {
   text-align: left;
+  display: flex;
+  flex-direction: column;
   background-color: #282c34;
 }
 html {
@@ -15,7 +17,7 @@ html {
 .App-header {
   background-color: #282c34;
   /* min-height: 100vh; */
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -27,19 +29,26 @@ html {
   color: #61dafb;
 }
 
-.planes {
+#results {
+  margin: 50px;
+}
+
+#overview {
+  color: red;
+  text-align: center;
+}
+
+#planes {
   background-color: #282c34;
-  display: flexbox;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-auto-flow: dense;
   text-align: left;
 }
 
 flight {
   display: inline-flex;
   flex-direction: row;
-  align-items: center;
 }
 
 @keyframes App-logo-spin {

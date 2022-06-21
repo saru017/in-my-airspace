@@ -1,19 +1,27 @@
+//Future implementation: add distance calculation using lat/long
+
 import './Plane.css';
 import { useState, useEffect, React } from 'react';
 
 function Plane(props) {
   return (
-    <article>
+    <div id="plane">
       <h3>
         Flight: {props.flight.flight}
         <br />
         Type: {props.flight.t}
         <br />
-        Hex: {props.flight.hex}
+        Registration: {props.flight.r}
         <br />
-        Altitude: {props.flight.alt_baro}
+        Altitude: {props.flight.alt_baro} ft
+        <br />
+        Speed: {props.flight.gs}
+        <br />
+        Lat: {props.flight.lat}
+        <br />
+        Lon: {props.flight.lon}
       </h3>
-    </article>
+    </div>
   );
 }
 

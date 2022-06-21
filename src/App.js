@@ -24,28 +24,39 @@ function App() {
     )
       .then((response) => response.json())
       .then((response) => setPlanes(response))
-      .catch((err) => console.error(err));
+      .catch((err) => window.alert(err));
   };
 
   const numPlanes = planes.ac;
-  //console.log(numPlanes);
+  //console.log(planes.ac);
 
   return (
     <div className="App">
       <header className="App-header">
         <UserLocation location={location} />
-      </header>
-
-      <div className="planes">
         <center>
           <button onClick={fetchPlanes}>Find Planes!</button>
         </center>
-        <br />
-        <PlaneCount planes={planes} />
-        <br />
-        {!planes.ac
-          ? ''
-          : planes.ac.map((p) => <Plane flight={p} className="flight" />)}
+      </header>
+      
+      <div id="results">
+        <div id="overview">
+          <br />
+          {!planes.ac ? (
+            <h3>There seems to be nothing in your airspace!</h3>
+          ) : (
+            <PlaneCount planes={planes} />
+          )}
+          <br />
+        </div>
+
+        <div id="planes">
+          {!planes.ac
+            ? ''
+            : planes.ac.map((p, index) => (
+                <Plane key={index} flight={p} className="flight" />
+              ))}
+        </div>
       </div>
     </div>
   );
