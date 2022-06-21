@@ -3,7 +3,6 @@ import { useState } from 'react';
 import Plane from './components/Plane';
 import UserLocation from './components/UserLocation';
 import { usePosition } from './components/usePosition';
-import { config } from './config';
 import PlaneCount from './components/PlaneCount';
 
 function App() {
@@ -13,9 +12,13 @@ function App() {
   const fetchPlanes = async () => {
     const latT = location.latitude.toFixed(3);
     const lonT = location.longitude.toFixed(3);
+
     const options = {
-      method: config.method,
-      headers: config.headers,
+      method: 'GET',
+      headers: {
+        'X-RapidAPI-Key': process.env.REACT_APP_ADSB_KEY,
+        'X-RapidAPI-Host': process.env.REACT_APP_ADSB_HOST,
+      },
     };
 
     fetch(
@@ -28,7 +31,6 @@ function App() {
   };
 
   const numPlanes = planes.ac;
-  //console.log(planes.ac);
 
   return (
     <div className="App">
@@ -38,7 +40,7 @@ function App() {
           <button onClick={fetchPlanes}>Find Planes!</button>
         </center>
       </header>
-      
+
       <div id="results">
         <div id="overview">
           <br />
