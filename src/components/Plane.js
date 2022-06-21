@@ -1,7 +1,7 @@
 //Future implementation: add distance calculation using lat/long
 
 import './Plane.css';
-import { useState, useEffect, React } from 'react';
+//import { useState, useEffect, React } from 'react';
 
 function Plane(props) {
   return (

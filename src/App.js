@@ -30,7 +30,7 @@ function App() {
       .catch((err) => window.alert(err));
   };
 
-  const numPlanes = planes.ac;
+  //const numPlanes = planes.ac;
 
   return (
     <div className="App">
